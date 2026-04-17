@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Resume &amp; Portfolio Builder | ShareUrInterest</title>
+  <meta name="description" content="Create your resume and portfolio instantly using AI. No coding required. Launch your professional presence in minutes." />
+  <meta name="keywords" content="AI resume builder, portfolio generator, developer portfolio, create resume online, portfolio website builder, AI portfolio, online resume, professional portfolio" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="ShareUrInterest" />
+  <link rel="canonical" href="https://shareurinterest.com/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://shareurinterest.com/" />
+  <meta property="og:title" content="AI Resume &amp; Portfolio Builder | ShareUrInterest" />
+  <meta property="og:description" content="Create your resume and portfolio instantly using AI. No coding required. Launch your professional presence in minutes." />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&q=80" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="AI Resume &amp; Portfolio Builder | ShareUrInterest" />
+  <meta name="twitter:description" content="Create your resume and portfolio instantly using AI. No coding required. Launch your professional presence in minutes." />
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&q=80" />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "ShareUrInterest",
+    "description": "AI-powered resume and portfolio builder. Create your professional online presence in minutes.",
+    "url": "https://shareurinterest.com",
+    "applicationCategory": "BusinessApplication",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #080810;
+      --surface: #0f0f1e;
+      --surface2: #13132a;
+      --violet: #7c3aed;
+      --violet-light: #a78bfa;
+      --violet-dim: #4c1d95;
+      --rose: #f43f5e;
+      --cyan: #06b6d4;
+      --text: #e2e0ff;
+      --muted: #8b87b0;
+      --border: rgba(124,58,237,0.25);
+      --glow: rgba(124,58,237,0.4);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Syne', sans-serif;
+      line-height: 1.15;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.1rem 6vw;
+      background: rgba(8,8,16,0.75);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-brand {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.2rem;
+      background: linear-gradient(120deg, var(--violet-light), var(--cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .nav-links { display: flex; gap: 1.5rem; font-size: 0.9rem; color: var(--muted); }
+    .nav-links a:hover { color: var(--violet-light); transition: color 0.2s; }
+    .nav-cta {
+      background: var(--violet);
+      color: #fff;
+      padding: 0.55rem 1.3rem;
+      border-radius: 8px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: 0.88rem;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .nav-cta:hover { background: #6d28d9; transform: translateY(-1px); }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center;
+      padding: 8rem 6vw 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-blob {
+      position: absolute; border-radius: 50%; filter: blur(100px); pointer-events: none; z-index: 0;
+    }
+    .blob1 { width: 600px; height: 600px; background: rgba(124,58,237,0.22); top: -150px; left: -150px; }
+    .blob2 { width: 500px; height: 500px; background: rgba(6,182,212,0.12); bottom: -100px; right: -100px; }
+    .blob3 { width: 350px; height: 350px; background: rgba(244,63,94,0.1); top: 40%; left: 50%; transform: translate(-50%,-50%); }
+
+    .hero-badge {
+      position: relative; z-index: 1;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(124,58,237,0.15);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.38rem 1.1rem;
+      font-size: 0.82rem;
+      color: var(--violet-light);
+      font-weight: 500;
+      margin-bottom: 1.8rem;
+      letter-spacing: 0.04em;
+    }
+    .badge-dot { width: 7px; height: 7px; border-radius: 50%; background: #22d3ee; box-shadow: 0 0 8px #22d3ee; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+    .hero h1 {
+      position: relative; z-index: 1;
+      /* font-size: clamp(2.6rem, 6vw, 5rem); */
+        font-size: clamp(2.2rem, 6vw, 5rem); 
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+      margin-inline: auto; /* Centers the heading on large screens */
+  max-width: 820px;
+  text-align: center;  /* Ensures text is centered within its box */
+    }
+    .hero h1 span {
+      background: linear-gradient(135deg, #a78bfa 0%, #38bdf8 60%, #f43f5e 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero-sub {
+      position: relative; z-index: 1;
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--muted);
+      max-width: 580px;
+      margin-bottom: 2.8rem;
+      font-weight: 300;
+    }
+    .hero-actions {
+      position: relative; z-index: 1;
+      display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: linear-gradient(135deg, var(--violet), #6d28d9);
+      color: #fff; padding: 0.85rem 2rem;
+      border-radius: 12px; font-family: 'Syne', sans-serif;
+      font-weight: 700; font-size: 1rem;
+      box-shadow: 0 0 30px rgba(124,58,237,0.45);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 0 45px rgba(124,58,237,0.7); }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: transparent; color: var(--text);
+      padding: 0.85rem 2rem; border-radius: 12px;
+      border: 1px solid var(--border);
+      font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem;
+      transition: background 0.2s, transform 0.2s, border-color 0.2s;
+    }
+    .btn-secondary:hover { background: rgba(124,58,237,0.1); border-color: var(--violet-light); transform: translateY(-3px); }
+
+    .hero-img {
+      position: relative; z-index: 1;
+      margin-top: 4rem;
+      margin-inline: auto; 
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 40px 100px rgba(0,0,0,0.6), 0 0 60px rgba(124,58,237,0.2);
+      max-width: 900px; width: 100%;
+    }
+    .hero-img img { width: 100%;height: auto; display: block; filter: brightness(0.85) saturate(1.2); }
+
+    /* ─── SECTION COMMON ─── */
+    section { padding: 6rem 6vw; }
+    .section-label {
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.14em;
+      color: var(--violet-light); text-transform: uppercase; margin-bottom: 0.8rem;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 800; letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+    .section-sub { color: var(--muted); max-width: 560px; font-size: 1.05rem; }
+    .centered { text-align: center; }
+    .centered .section-sub { margin: 0 auto; }
+
+    /* ─── FEATURES ─── */
+    .features { background: var(--surface); }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem; margin-top: 3.5rem;
+    }
+    .feature-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 18px; padding: 2rem;
+      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+      position: relative; overflow: hidden;
+    }
+    .feature-card::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(124,58,237,0.07), transparent);
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .feature-card:hover { border-color: var(--violet-light); transform: translateY(-6px); box-shadow: 0 20px 60px rgba(124,58,237,0.15); }
+    .feature-card:hover::before { opacity: 1; }
+    .feature-icon {
+      width: 52px; height: 52px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; margin-bottom: 1.2rem;
+    }
+    .ic1 { background: rgba(124,58,237,0.2); }
+    .ic2 { background: rgba(6,182,212,0.2); }
+    .ic3 { background: rgba(244,63,94,0.2); }
+    .ic4 { background: rgba(34,197,94,0.2); }
+    .feature-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.6rem; }
+    .feature-card p { color: var(--muted); font-size: 0.93rem; }
+
+    /* ─── HOW IT WORKS ─── */
+    .hiw-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0; margin-top: 3.5rem; position: relative;
+    }
+    .step {
+      text-align: center; padding: 2.5rem 2rem;
+      position: relative;
+    }
+    .step:not(:last-child)::after {
+      content: '';
+      position: absolute; top: 3.5rem; right: -1px;
+      width: 2px; height: 30px;
+      background: linear-gradient(to bottom, var(--violet), transparent);
+    }
+    @media (max-width: 680px) { .step:not(:last-child)::after { display: none; } }
+    .step-num {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--violet), #4f46e5);
+      color: #fff; font-family: 'Syne', sans-serif;
+      font-size: 1.3rem; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.3rem;
+      box-shadow: 0 0 28px rgba(124,58,237,0.5);
+    }
+    .step h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+    .step p { color: var(--muted); font-size: 0.92rem; }
+
+    /* ─── PRODUCTS ─── */
+    .products-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem; margin-top: 3.5rem;
+    }
+    .product-card {
+      border-radius: 22px; overflow: hidden;
+      border: 1px solid var(--border);
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+    }
+    .product-card:hover { transform: translateY(-8px); box-shadow: 0 30px 80px rgba(0,0,0,0.5); }
+    .product-card-img { width: 100%; height: 220px; object-fit: cover; display: block; filter: brightness(0.7) saturate(1.3); }
+    .product-card-body { padding: 1.8rem; background: var(--surface2); }
+    .product-tag {
+      display: inline-block; font-size: 0.75rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.3rem 0.85rem; border-radius: 999px; margin-bottom: 0.9rem;
+    }
+    .tag-violet { background: rgba(124,58,237,0.2); color: var(--violet-light); }
+    .tag-cyan { background: rgba(6,182,212,0.2); color: #67e8f9; }
+    .product-card h3 { font-size: 1.35rem; margin-bottom: 0.6rem; }
+    .product-card p { color: var(--muted); font-size: 0.93rem; margin-bottom: 1.4rem; }
+    .product-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.95rem;
+      color: var(--violet-light);
+      transition: gap 0.2s;
+    }
+    .product-link:hover { gap: 0.7rem; }
+
+    /* ─── SEO CONTENT ─── */
+    .seo { background: var(--surface); }
+    .seo-body { max-width: 780px; margin: 2.5rem auto 0; }
+    .seo-body p { color: var(--muted); font-size: 1rem; margin-bottom: 1.4rem; line-height: 1.8; }
+    .seo-body strong { color: var(--text); }
+
+    /* ─── FAQ ─── */
+    .faq-list { max-width: 700px; margin: 3rem auto 0; }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      padding: 1.4rem 0;
+    }
+    .faq-q {
+      display: flex; justify-content: space-between; align-items: center;
+      cursor: pointer; font-family: 'Syne', sans-serif;
+      font-weight: 600; font-size: 1rem;
+      color: var(--text);
+      gap: 1rem;
+    }
+    .faq-q .icon { color: var(--violet-light); font-size: 1.3rem; transition: transform 0.3s; flex-shrink: 0; }
+    .faq-item.open .faq-q .icon { transform: rotate(45deg); }
+    .faq-a {
+      color: var(--muted); font-size: 0.95rem; line-height: 1.7;
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s;
+    }
+    .faq-item.open .faq-a { max-height: 200px; padding-top: 0.8rem; }
+
+    /* ─── FINAL CTA ─── */
+    .final-cta {
+      text-align: center; padding: 7rem 6vw;
+      position: relative; overflow: hidden;
+    }
+    .final-cta::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 60%, rgba(124,58,237,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .final-cta h2 { font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 800; margin-bottom: 1rem; }
+    .final-cta p { color: var(--muted); margin-bottom: 2.5rem; font-size: 1.1rem; }
+    .final-cta .hero-actions { justify-content: center; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--surface); border-top: 1px solid var(--border);
+      padding: 3rem 6vw;
+    }
+    .footer-inner {
+      display: flex; flex-wrap: wrap; gap: 2rem;
+      justify-content: space-between; align-items: flex-start;
+    }
+    .footer-brand { max-width: 280px; }
+    .footer-brand .nav-brand { font-size: 1.3rem; display: inline-block; margin-bottom: 0.7rem; }
+    .footer-brand p { color: var(--muted); font-size: 0.88rem; line-height: 1.7; }
+    .footer-links h4 {
+      font-family: 'Syne', sans-serif; font-size: 0.82rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 1rem;
+    }
+    .footer-links ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+    .footer-links a { color: var(--text); font-size: 0.92rem; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--violet-light); }
+    .footer-bottom {
+      margin-top: 2.5rem; padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      display: flex; flex-wrap: wrap; gap: 1rem;
+      justify-content: space-between; align-items: center;
+      color: var(--muted); font-size: 0.83rem;
+    }
+
+    /* ─── SCROLL FADE IN ─── */
+    .fade-up {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: none; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      nav .nav-links { display: none; }
+      .step:not(:last-child)::after { display: none; }
+      .hiw-steps { gap: 1.5rem; }
+    }
+
+    @media (max-width: 480px) {
+  .hero h1 br { display: none; }
+}
+
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<!-- <nav>
+  <span class="nav-brand">ShareUrInterest</span>
+  <div class="nav-links">
+    <a href="#features">Features</a>
+    <a href="#how-it-works">How It Works</a>
+    <a href="#products">Products</a>
+    <a href="#faq">FAQ</a>
+  </div>
+  <a href="https://shareurinterest.com/" class="nav-cta">Get Started Free</a> 
+</nav> -->
+
+<nav>
+  <span class="nav-brand">
+    <!-- Added logo icon here -->
+    <img src="https://ai.shareurinterest.com/logo.png" alt="Logo" style="height: 24px; vertical-align: middle; margin-right: 8px;">
+    ShareUrInterest
+  </span>
+  <div class="nav-links">
+    <a href="#features">Features</a>
+    <a href="#how-it-works">How It Works</a>
+    <a href="#products">Products</a>
+    <a href="#faq">FAQ</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" aria-label="Hero">
+  <div class="hero-blob blob1"></div>
+  <div class="hero-blob blob2"></div>
+  <div class="hero-blob blob3"></div>
+
+  <div class="hero-badge">
+    <span class="badge-dot"></span>
+    AI-Powered · No Coding Required · Launch in Minutes
+  </div>
+
+  <h1>
+    Build Your <span>AI Resume &amp;<br>Portfolio</span> in Minutes
+  </h1>
+
+  <p class="hero-sub">
+    Stop spending days crafting your professional profile. Our AI resume builder and portfolio generator create stunning, job-ready content instantly — just enter your details and go live.
+  </p>
+
+  <div class="hero-actions">
+    <a href="https://ai.shareurinterest.com/" class="btn-primary">
+      ✦ Create Portfolio
+    </a>
+    <a href="https://resume.shareurinterest.com/" class="btn-secondary">
+      📄 Create Resume
+    </a>
+  </div>
+
+  <div class="hero-img fade-up">
+    <img
+      src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1100&q=80&auto=format&fit=crop"
+      alt="Professional AI-generated resume and portfolio interface on laptop"
+      width="900" height="500"
+      loading="eager"
+    />
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="features" aria-label="Features">
+  <div class="centered fade-up">
+    <p class="section-label">Why ShareUrInterest</p>
+    <h2 class="section-title">Everything You Need to Stand Out</h2>
+    <p class="section-sub">From AI-generated resume content to a live portfolio website — we handle the hard parts.</p>
+  </div>
+  <div class="features-grid fade-up">
+    <div class="feature-card">
+      <div class="feature-icon ic1">🤖</div>
+      <h3>AI Generated Resume</h3>
+      <p>Our AI resume builder crafts compelling bullet points, summaries, and skills sections tailored to your industry — instantly and professionally.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon ic2">🌐</div>
+      <h3>Portfolio Website in Minutes</h3>
+      <p>Your developer portfolio goes live in under 5 minutes. Choose a design, add your projects, and publish — no web design experience needed.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon ic3">⚡</div>
+      <h3>No Coding Required</h3>
+      <p>The portfolio website builder handles all the HTML, CSS, and hosting. You just focus on your story and let AI do the heavy lifting.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon ic4">🚀</div>
+      <h3>Instant Publish</h3>
+      <p>One click deploys your resume or portfolio to a shareable URL — ready to send to recruiters, clients, or drop into LinkedIn.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how-it-works" aria-label="How It Works">
+  <div class="centered fade-up">
+    <p class="section-label">The Process</p>
+    <h2 class="section-title">Three Steps to a Professional Presence</h2>
+    <p class="section-sub">Create your resume online or build a portfolio website in the time it takes to brew a coffee.</p>
+  </div>
+  <div class="hiw-steps fade-up">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h3>Enter Your Details</h3>
+      <p>Fill in your experience, skills, education, and projects. The form is simple and guided — takes under 5 minutes.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h3>AI Generates Content</h3>
+      <p>Our AI instantly writes polished resume copy and formats your portfolio with the right layout, structure, and design.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h3>Publish Instantly</h3>
+      <p>Hit publish and your professional profile goes live. Share the link anywhere — no downloads, no email attachments.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products" style="background: var(--surface);" aria-label="Products">
+  <div class="centered fade-up">
+    <p class="section-label">Our Tools</p>
+    <h2 class="section-title">Two Products, One Mission</h2>
+    <p class="section-sub">Choose the tool that fits your need — or use both for the ultimate professional edge.</p>
+  </div>
+  <div class="products-grid fade-up">
+    <div class="product-card">
+      <img
+        src="https://images.unsplash.com/photo-1555421689-491a97ff2040?w=700&q=80&auto=format&fit=crop"
+        alt="AI Portfolio Builder - developer portfolio generator interface"
+        class="product-card-img"
+        loading="lazy"
+        width="700" height="220"
+      />
+      <div class="product-card-body">
+        <span class="product-tag tag-violet">AI Portfolio Builder</span>
+        <h3>Developer Portfolio Generator</h3>
+        <p>Create a stunning, live portfolio website that showcases your projects, skills, and personality. The AI portfolio generator handles design, copy, and hosting automatically.</p>
+        <a href="https://ai.shareurinterest.com/" class="product-link" rel="noopener">
+          Build Your Portfolio →
+        </a>
+      </div>
+    </div>
+    <div class="product-card">
+      <img
+        src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=700&q=80&auto=format&fit=crop"
+        alt="AI Resume Builder - create resume online with AI assistance"
+        class="product-card-img"
+        loading="lazy"
+        width="700" height="220"
+      />
+      <div class="product-card-body">
+        <span class="product-tag tag-cyan">AI Resume Builder</span>
+        <h3>Create Your Resume Online</h3>
+        <p>Generate a polished, ATS-friendly resume using AI. The AI resume builder writes impactful bullet points and summaries that highlight your strengths to recruiters.</p>
+        <a href="https://resume.shareurinterest.com/" class="product-link" rel="noopener">
+          Build Your Resume →
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEO CONTENT -->
+<section class="seo" aria-label="About AI Resume and Portfolio Building">
+  <div class="centered fade-up">
+    <p class="section-label">Why It Matters</p>
+    <h2 class="section-title">Your Career Starts with Your Presence</h2>
+  </div>
+  <div class="seo-body fade-up">
+    <p>
+      An <strong>AI resume builder</strong> removes the most frustrating part of job searching: writing about yourself. Most professionals struggle to translate their experience into compelling language that resonates with hiring managers and applicant tracking systems. ShareUrInterest's AI does exactly that — it reads your background and generates polished, keyword-rich resume content in seconds. The result is a professional document that competes at the top of any applicant pile, whether you're a fresh graduate or a seasoned engineer.
+    </p>
+    <p>
+      A <strong>developer portfolio</strong> is no longer optional — it's the difference between getting noticed and getting ignored. Recruiters spend an average of six seconds on a resume but will spend minutes exploring an interactive portfolio. Our <strong>portfolio website builder</strong> gives developers, designers, and freelancers a live, shareable URL that demonstrates work rather than just describing it. Projects become interactive. Skills become visible. You become memorable. Building a portfolio website used to require knowledge of HTML, CSS, hosting, and domain configuration — our <strong>portfolio generator</strong> eliminates every single one of those barriers.
+    </p>
+    <p>
+      In today's remote and global job market, your online professional presence is your first handshake. Whether you want to <strong>create a resume online</strong> for a job application or launch a full portfolio site for freelance clients, having both tools in one platform gives you an unfair advantage. ShareUrInterest is built for professionals who value their time — smart, fast, and effective.
+    </p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" aria-label="Frequently Asked Questions">
+  <div class="centered fade-up">
+    <p class="section-label">FAQ</p>
+    <h2 class="section-title">Common Questions</h2>
+  </div>
+  <div class="faq-list fade-up" itemscope itemtype="https://schema.org/FAQPage">
+
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span itemprop="name">Is ShareUrInterest free to use?</span>
+        <span class="icon">+</span>
+      </div>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+        <span itemprop="text">Yes — you can create your resume and portfolio for free. Simply visit the product pages and start building immediately with no credit card required.</span>
+      </div>
+    </div>
+
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span itemprop="name">Do I need any coding skills to build a portfolio?</span>
+        <span class="icon">+</span>
+      </div>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+        <span itemprop="text">Absolutely not. The portfolio website builder handles all technical aspects automatically. You just input your information and the AI handles design, code, and hosting.</span>
+      </div>
+    </div>
+
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span itemprop="name">How fast can I create a resume using the AI?</span>
+        <span class="icon">+</span>
+      </div>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+        <span itemprop="text">Most users complete their AI-generated resume in under 5 minutes. Fill out the form, let the AI generate your content, review it, and download or share instantly.</span>
+      </div>
+    </div>
+
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span itemprop="name">Will my portfolio have a live URL I can share?</span>
+        <span class="icon">+</span>
+      </div>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+        <span itemprop="text">Yes! Every portfolio created with our builder gets a unique, shareable URL hosted by us. You can send it directly to recruiters, add it to LinkedIn, or print it on your business card.</span>
+      </div>
+    </div>
+
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span itemprop="name">Who is ShareUrInterest built for?</span>
+        <span class="icon">+</span>
+      </div>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+        <span itemprop="text">ShareUrInterest is designed for developers, designers, students, freelancers, and any professional who wants to establish a strong online presence quickly — without hiring a designer or developer.</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta" aria-label="Call to Action">
+  <p class="section-label" style="text-align:center">Ready to Launch?</p>
+  <h2>Your Professional Presence<br>Starts Here</h2>
+  <p>Join thousands of professionals who built their resume and portfolio with AI — in minutes, not days.</p>
+  <div class="hero-actions">
+    <a href="https://ai.shareurinterest.com/" class="btn-primary">✦ Build Portfolio Now</a>
+    <a href="https://resume.shareurinterest.com/" class="btn-secondary">📄 Build Resume Now</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="nav-brand">ShareUrInterest</span>
+      <p>AI-powered tools that help professionals create standout resumes and portfolio websites — instantly, without code.</p>
+    </div>
+    <div class="footer-links">
+      <h4>Products</h4>
+      <ul>
+        <li><a href="https://ai.shareurinterest.com/" rel="noopener">AI Portfolio Builder</a></li>
+        <li><a href="https://resume.shareurinterest.com/" rel="noopener">AI Resume Builder</a></li>
+      </ul>
+    </div>
+    <div class="footer-links">
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 ShareUrInterest. All rights reserved.</span>
+    <span>Built with AI · Designed for Professionals</span>
+  </div>
+</footer>
+
+<script>
+  // FAQ toggle
+  function toggleFaq(el) {
+    const item = el.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // Scroll fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
